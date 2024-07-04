@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percussion Section Score Assignment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            height: 90vh;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow-y: auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .hidden {
+            display: none;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        input[type="number"], input[type="text"] {
+            width: 50px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
+        .clear-button {
+            background-color: #FF6347;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        .grid-item {
+            width: 100px;
+            height: 100px;
+            background-color: #007BFF;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .revealed {
+            background-color: #f0f0f0;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="page2" class="page">
+            <h1>譜與人數</h1>
+            <button class="clear-button" onclick="clearAll()">清除全部</button>
+            <div class="form-group">
+                <label><input type="checkbox" class="item" value="Timpani"> Timpani <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Percussion 1"> Percussion 1 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Percussion 2"> Percussion 2 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Percussion 3"> Percussion 3 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Percussion 4"> Percussion 4 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Percussion 5"> Percussion 5 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Mallet 1"> Mallet 1 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Mallet 2"> Mallet 2 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Mallet 3"> Mallet 3 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Mallet 4"> Mallet 4 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Mallet 5"> Mallet 5 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Aux. Per. 1"> Aux. Per. 1 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Aux. Per. 2"> Aux. Per. 2 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Aux. Per. 3"> Aux. Per. 3 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Aux. Per. 4"> Aux. Per. 4 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Aux. Per. 5"> Aux. Per. 5 <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Drum-Set"> Drum-Set <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Keyboard"> Keyboard <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Harp"> Harp <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Celesta"> Celesta <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="SD"> SD <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="BD"> BD <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Cym"> Cym <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Tri"> Tri <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Sus.Cym"> Sus.Cym <input type="number" min="1" class="item-num"></label>
+                <label><input type="checkbox" class="item" value="Bells"> Bells <input type="number" min="1" class="item-num"></label>
+            </div>
+            <button onclick="startDraw()">抽籤</button>
+            <button onclick="generateGrid()">抽牌</button>
+        </div>
+
+        <div id="page3" class="page hidden">
+            <h1>Drawing Results</h1>
+            <div id="result"></div>
+            <button onclick="goToPage2()">重選</button>
+        </div>
+
+        <div id="page4" class="page hidden">
+            <h1>抽吧!</h1>
+            <div id="grid" class="grid"></div>
+            <button onclick="goToPage2()">重選</button>
+        </div>
+    </div>
+
+    <script>
+        let selections = [];
+
+        function startDraw() {
+            const items = document.querySelectorAll('.item:checked');
+            selections = [];
+            let totalPeople = 0;
+            
+            items.forEach(item => {
+                const name = item.value;
+                const numInput = item.nextElementSibling;
+                const count = numInput.value ? parseInt(numInput.value) : 1;
+                totalPeople += count;
+                
+                for (let i = 0; i < count; i++) {
+                    selections.push(name);
+                }
+            });
+
+            if (selections.length < totalPeople) {
+                alert('The selected items are not enough to be assigned to all people.');
+                return;
+            }
+
+            const shuffled = fisherYatesShuffle(selections);
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            
+            for (let i = 0; i < totalPeople; i++) {
+                const assignment = shuffled[i % shuffled.length];
+                const p = document.createElement('p');
+                p.textContent = `第 ${i + 1}位: ${assignment}`;
+                resultDiv.appendChild(p);
+            }
+
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page3').classList.remove('hidden');
+        }
+
+        function generateGrid() {
+            const items = document.querySelectorAll('.item:checked');
+            selections = [];
+            let totalPeople = 0;
+            
+            items.forEach(item => {
+                const name = item.value;
+                const numInput = item.nextElementSibling;
+                const count = numInput.value ? parseInt(numInput.value) : 1;
+                totalPeople += count;
+                
+                for (let i = 0; i < count; i++) {
+                    selections.push(name);
+                }
+            });
+
+            if (selections.length < totalPeople) {
+                alert('The selected items are not enough to be assigned to all people.');
+                return;
+            }
+
+            const shuffled = fisherYatesShuffle(selections);
+            const grid = document.getElementById('grid');
+            grid.innerHTML = '';
+
+            shuffled.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = 'grid-item';
+                div.dataset.value = item;
+                div.onclick = () => revealItem(div);
+                grid.appendChild(div);
+            });
+
+            document.getElementById('page2').classList.add('hidden');
+            document.getElementById('page4').classList.remove('hidden');
+        }
+
+        function revealItem(div) {
+            div.classList.add('revealed');
+            div.innerHTML = div.dataset.value;
+            div.onclick = null;
+        }
+
+        function clearAll() {
+            const items = document.querySelectorAll('.item');
+            items.forEach(item => item.checked = false);
+
+            const numbers = document.querySelectorAll('.item-num');
+            numbers.forEach(num => num.value = '');
+        }
+
+        function fisherYatesShuffle(array) {
+            let m = array.length, t, i;
+            while (m) {
+                i = Math.floor(Math.random() * m--);
+                t = array[m];
+                array[m] = array[i];
+                array[i] = t;
+            }
+            return array;
+        }
+
+        function goToPage2() {
+            document.getElementById('page3').classList.add('hidden');
+            document.getElementById('page4').classList.add('hidden');
+            document.getElementById('page2').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
